@@ -1,0 +1,686 @@
+/* ============================================
+   3D BIRTHDAY CAKE - MASSIVE & BEAUTIFUL
+   ============================================ */
+
+.cake-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 0 60px;
+  position: relative;
+  min-height: 650px;
+}
+
+/* Glowing aura behind the cake */
+.cake-glow {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 105, 180, 0.35) 0%, rgba(255, 215, 0, 0.2) 40%, transparent 70%);
+  filter: blur(40px);
+  animation: cakeGlowPulse 4s ease-in-out infinite;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.cake-glow-2 {
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(138, 43, 226, 0.2) 0%, rgba(0, 206, 209, 0.15) 40%, transparent 70%);
+  animation: cakeGlowPulse 4s ease-in-out infinite 2s;
+}
+
+@keyframes cakeGlowPulse {
+  0%, 100% { transform: scale(1); opacity: 0.7; }
+  50% { transform: scale(1.15); opacity: 1; }
+}
+
+/* Stage */
+.cake-stage {
+  position: relative;
+  width: 450px;
+  height: 620px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  perspective: 1200px;
+  z-index: 2;
+}
+
+.cake-3d-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  transform-style: preserve-3d;
+}
+
+.cake-3d {
+  position: relative;
+  transform-style: preserve-3d;
+  animation: rotateCake 14s linear infinite;
+  transform: rotateX(-18deg) rotateY(0deg);
+  margin-bottom: 30px;
+}
+
+@keyframes rotateCake {
+  from { transform: rotateX(-18deg) rotateY(0deg); }
+  to { transform: rotateX(-18deg) rotateY(360deg); }
+}
+
+/* ========== TIER SYSTEM ========== */
+.cake-tier {
+  position: relative;
+  transform-style: preserve-3d;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tier-cylinder {
+  position: relative;
+  transform-style: preserve-3d;
+}
+
+/* Each face of the cylinder polygon */
+.tier-face {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  margin-left: -12px;
+  width: 24px;
+  backface-visibility: hidden;
+  box-shadow: inset 0 0 8px rgba(0,0,0,0.08);
+}
+
+/* Tier top & bottom caps (ellipses) */
+.tier-top, .tier-bottom {
+  position: absolute;
+  left: 50%;
+  border-radius: 50%;
+  box-shadow: inset 0 0 20px rgba(255,255,255,0.3);
+}
+
+.tier-top {
+  transform: translateX(-50%) rotateX(90deg);
+  top: 0;
+}
+
+.tier-bottom {
+  transform: translateX(-50%) rotateX(-90deg);
+  bottom: 0;
+}
+
+/* ===== TIER 1 (Bottom - Largest) ===== */
+.tier-1 { margin-bottom: -2px; }
+.tier-1 .tier-cylinder { width: 260px; height: 85px; }
+.tier-1 .tier-face { height: 85px; }
+.tier-top-1, .tier-bottom-1 {
+  width: 260px; height: 260px;
+  background: radial-gradient(ellipse, #FFCDD2 0%, #EF9A9A 60%, #EF5350 100%);
+}
+
+/* ===== TIER 2 ===== */
+.tier-2 { margin-bottom: -2px; }
+.tier-2 .tier-cylinder { width: 200px; height: 78px; }
+.tier-2 .tier-face { height: 78px; }
+.tier-top-2, .tier-bottom-2 {
+  width: 200px; height: 200px;
+  background: radial-gradient(ellipse, #B3E5FC 0%, #4FC3F7 60%, #0288D1 100%);
+}
+
+/* ===== TIER 3 ===== */
+.tier-3 { margin-bottom: -2px; }
+.tier-3 .tier-cylinder { width: 150px; height: 72px; }
+.tier-3 .tier-face { height: 72px; }
+.tier-top-3, .tier-bottom-3 {
+  width: 150px; height: 150px;
+  background: radial-gradient(ellipse, #E1BEE7 0%, #CE93D8 60%, #8E24AA 100%);
+}
+
+/* ===== TIER 4 ===== */
+.tier-4 { margin-bottom: -2px; }
+.tier-4 .tier-cylinder { width: 105px; height: 65px; }
+.tier-4 .tier-face { height: 65px; }
+.tier-top-4, .tier-bottom-4 {
+  width: 105px; height: 105px;
+  background: radial-gradient(ellipse, #F8BBD0 0%, #F06292 60%, #D81B60 100%);
+}
+
+/* ===== TIER 5 (Top - Smallest) ===== */
+.tier-5 { margin-bottom: -2px; }
+.tier-5 .tier-cylinder { width: 65px; height: 55px; }
+.tier-5 .tier-face { height: 55px; }
+.tier-top-5, .tier-bottom-5 {
+  width: 65px; height: 65px;
+  background: radial-gradient(ellipse, #FFF9C4 0%, #FFD54F 60%, #FF8F00 100%);
+}
+
+
+/* ========== CREAM DRIPS ========== */
+.drip-ring {
+  position: absolute;
+  top: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  transform-style: preserve-3d;
+}
+
+.cream-drip-3d {
+  position: absolute;
+  transform-style: preserve-3d;
+}
+
+.drip-blob {
+  width: 10px;
+  background: linear-gradient(180deg, #FFFDE7, #FFF9C4, #FFF176);
+  border-radius: 0 0 50% 50%;
+  animation: dripWobble 3s ease-in-out infinite;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  margin-left: -5px;
+}
+
+.drip-choco {
+  background: linear-gradient(180deg, #5D4037, #795548, #8D6E63);
+}
+
+.drip-white {
+  background: linear-gradient(180deg, #FFFFFF, #FAFAFA, #F5F5F5);
+}
+
+.drip-pink {
+  background: linear-gradient(180deg, #FCE4EC, #F8BBD0, #F48FB1);
+}
+
+@keyframes dripWobble {
+  0%, 100% { transform: scaleY(1); }
+  50% { transform: scaleY(1.25); }
+}
+
+
+/* ========== DECORATIONS ========== */
+.tier-decor-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transform-style: preserve-3d;
+}
+
+.decor-item {
+  position: absolute;
+  transform-style: preserve-3d;
+}
+
+.decor-emoji {
+  font-size: 16px;
+  animation: decorBob 2s ease-in-out infinite;
+  display: block;
+  filter: drop-shadow(0 2px 3px rgba(0,0,0,0.2));
+}
+
+.decor-fruit .decor-emoji { font-size: 18px; }
+.decor-flower .decor-emoji { font-size: 18px; }
+
+@keyframes decorBob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+
+/* ========== RIBBONS ========== */
+.tier-ribbon-ring {
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  transform-style: preserve-3d;
+}
+
+.ribbon-segment {
+  position: absolute;
+  width: 24px;
+  height: 10px;
+  background: repeating-linear-gradient(
+    90deg, #FF4081 0px, #FF4081 4px, #FFF 4px, #FFF 8px
+  );
+  margin-left: -12px;
+  border-radius: 1px;
+}
+
+.ribbon-gold .ribbon-segment,
+.ribbon-segment.ribbon-gold {
+  background: repeating-linear-gradient(
+    90deg, #FFD700 0px, #FFD700 4px, #FFA000 4px, #FFA000 8px
+  );
+}
+
+.ribbon-segment.ribbon-candy {
+  background: repeating-linear-gradient(
+    90deg, #FF80AB 0px, #FF80AB 4px, #FFF 4px, #FFF 8px
+  );
+}
+
+.ribbon-4 .ribbon-segment {
+  background: repeating-linear-gradient(
+    90deg, #E040FB 0px, #E040FB 4px, #FFF 4px, #FFF 8px
+  );
+}
+
+.ribbon-2 .ribbon-segment {
+  background: repeating-linear-gradient(
+    90deg, #FFD700 0px, #FFD700 4px, #FF6F00 4px, #FF6F00 8px
+  );
+}
+
+
+/* ========== CANDLES ========== */
+.candles-ring {
+  position: absolute;
+  top: -50px;
+  left: 50%;
+  transform: translateX(-50%);
+  transform-style: preserve-3d;
+}
+
+.candle-3d {
+  position: absolute;
+  transform-style: preserve-3d;
+}
+
+.candle-stick {
+  width: 10px;
+  border-radius: 3px 3px 1px 1px;
+  margin-left: -5px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset -2px 0 5px rgba(0,0,0,0.15), inset 2px 0 5px rgba(255,255,255,0.2);
+}
+
+.candle-stripe-wrap {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+}
+
+.candle-stripe-line {
+  position: absolute;
+  left: 30%;
+  width: 1.5px;
+  height: 100%;
+  background: rgba(255,255,255,0.35);
+}
+
+.candle-stripe-line.s2 {
+  left: 60%;
+  background: rgba(255,255,255,0.2);
+}
+
+/* Flame */
+.flame-wrapper {
+  position: absolute;
+  top: -22px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.flame-wrapper.big {
+  top: -32px;
+}
+
+.flame {
+  position: relative;
+  width: 14px;
+  height: 20px;
+}
+
+.flame-big {
+  width: 22px;
+  height: 30px;
+}
+
+.flame-outer {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 12px;
+  height: 18px;
+  background: radial-gradient(ellipse at 50% 90%, #FF6F00, #FF8F00, #FFA726, transparent);
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  animation: flameOuter 0.15s ease-in-out infinite alternate;
+}
+
+.flame-big .flame-outer {
+  width: 20px;
+  height: 28px;
+}
+
+.flame-mid {
+  position: absolute;
+  bottom: 1px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 8px;
+  height: 14px;
+  background: radial-gradient(ellipse at 50% 85%, #FFEB3B, #FFF176, #FFF9C4);
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  animation: flameMid 0.12s ease-in-out infinite alternate;
+}
+
+.flame-big .flame-mid {
+  width: 14px;
+  height: 22px;
+}
+
+.flame-inner {
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 8px;
+  background: radial-gradient(ellipse at 50% 80%, #FFF, #FFFDE7);
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+}
+
+.flame-big .flame-inner {
+  width: 7px;
+  height: 14px;
+}
+
+.flame-glow-ring {
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 30px;
+  background: radial-gradient(circle, rgba(255, 200, 50, 0.5), rgba(255, 150, 0, 0.2), transparent);
+  border-radius: 50%;
+  animation: glowPulse 1.2s ease-in-out infinite alternate;
+  filter: blur(3px);
+}
+
+.big-glow {
+  width: 50px;
+  height: 50px;
+  background: radial-gradient(circle, rgba(255, 200, 50, 0.6), rgba(255, 100, 0, 0.3), transparent);
+}
+
+@keyframes flameOuter {
+  0% { transform: translateX(-50%) scaleX(1) scaleY(1) rotate(-1.5deg); }
+  100% { transform: translateX(-50%) scaleX(0.85) scaleY(1.08) rotate(1.5deg); }
+}
+
+@keyframes flameMid {
+  0% { transform: translateX(-50%) scaleX(1.05) scaleY(0.95); }
+  100% { transform: translateX(-50%) scaleX(0.9) scaleY(1.1); }
+}
+
+@keyframes glowPulse {
+  0% { opacity: 0.5; transform: translateX(-50%) scale(0.9); }
+  100% { opacity: 1; transform: translateX(-50%) scale(1.15); }
+}
+
+/* Center candle */
+.center-candle-3d {
+  position: absolute;
+  top: -75px;
+  left: 50%;
+  transform: translateX(-50%);
+  transform-style: preserve-3d;
+}
+
+.center-stick {
+  width: 18px;
+  height: 42px;
+  background: linear-gradient(135deg, #FF1744, #D50000);
+  border-radius: 4px 4px 2px 2px;
+  margin-left: -9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset -3px 0 6px rgba(0,0,0,0.2), inset 3px 0 6px rgba(255,255,255,0.2);
+  position: relative;
+}
+
+.center-number {
+  color: #FFD700;
+  font-size: 11px;
+  font-weight: 900;
+  text-shadow: 0 0 4px rgba(255, 215, 0, 0.8), 0 1px 2px rgba(0,0,0,0.5);
+  font-family: 'Pacifico', cursive;
+}
+
+/* Cake topper */
+.cake-topper {
+  position: absolute;
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 32px;
+  animation: topperSpin 3s linear infinite;
+  filter: drop-shadow(0 0 12px rgba(255, 215, 0, 0.8));
+}
+
+@keyframes topperSpin {
+  0% { transform: translateX(-50%) rotateY(0deg) scale(1); }
+  50% { transform: translateX(-50%) rotateY(180deg) scale(1.2); }
+  100% { transform: translateX(-50%) rotateY(360deg) scale(1); }
+}
+
+
+/* ========== CAKE STAND ========== */
+.cake-stand {
+  position: relative;
+  transform-style: preserve-3d;
+  margin-top: -2px;
+}
+
+.stand-top {
+  position: relative;
+  transform-style: preserve-3d;
+  height: 12px;
+}
+
+.stand-face {
+  position: absolute;
+  left: 50%;
+  margin-left: -14px;
+  width: 28px;
+  height: 12px;
+  background: linear-gradient(180deg, #E0E0E0, #BDBDBD, #9E9E9E);
+  box-shadow: inset 0 0 3px rgba(0,0,0,0.1);
+}
+
+.stand-pillar {
+  width: 40px;
+  height: 18px;
+  background: linear-gradient(180deg, #BDBDBD, #9E9E9E, #757575);
+  margin: 0 auto;
+  border-radius: 0 0 3px 3px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.stand-base {
+  position: relative;
+  transform-style: preserve-3d;
+  height: 10px;
+  margin-top: -1px;
+}
+
+.stand-base-face {
+  position: absolute;
+  left: 50%;
+  margin-left: -16px;
+  width: 32px;
+  height: 10px;
+  background: linear-gradient(180deg, #BDBDBD, #9E9E9E, #616161);
+  box-shadow: inset 0 0 3px rgba(0,0,0,0.1);
+}
+
+
+/* ========== SPARKLE RING ========== */
+.cake-sparkle-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px;
+  height: 10px;
+  pointer-events: none;
+}
+
+.ring-sparkle {
+  position: absolute;
+  font-size: 18px;
+  transform-origin: center center;
+  animation: sparkleOrbit 4s ease-in-out infinite;
+  opacity: 0;
+}
+
+@keyframes sparkleOrbit {
+  0% { opacity: 0; transform: rotate(var(--r)) translateY(-220px) scale(0.3); }
+  30% { opacity: 1; }
+  70% { opacity: 1; }
+  100% { opacity: 0; transform: rotate(var(--r)) translateY(-220px) scale(1.5); }
+}
+
+
+/* ========== FLOATING HEARTS ========== */
+.cake-hearts {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.floating-heart {
+  position: absolute;
+  bottom: -30px;
+  animation: heartFloat ease-in-out infinite;
+  opacity: 0;
+}
+
+@keyframes heartFloat {
+  0% { opacity: 0; transform: translateY(0) scale(0.5); }
+  15% { opacity: 1; }
+  85% { opacity: 0.8; }
+  100% { opacity: 0; transform: translateY(-500px) scale(1.2) rotate(20deg); }
+}
+
+
+/* ========== LIGHT RAYS ========== */
+.light-rays {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px;
+  height: 10px;
+  pointer-events: none;
+}
+
+.light-ray {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 2px;
+  height: 250px;
+  background: linear-gradient(180deg, rgba(255, 215, 0, 0.3), transparent);
+  transform-origin: top center;
+  animation: rayPulse 3s ease-in-out infinite;
+  opacity: 0;
+}
+
+@keyframes rayPulse {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 0.4; }
+}
+
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 768px) {
+  .cake-section {
+    min-height: 550px;
+    padding: 30px 0 50px;
+  }
+
+  .cake-stage {
+    width: 360px;
+    height: 530px;
+    perspective: 1000px;
+  }
+
+  .cake-glow { width: 380px; height: 380px; }
+  .cake-glow-2 { width: 450px; height: 450px; }
+
+  .tier-1 .tier-cylinder { width: 210px; height: 72px; }
+  .tier-1 .tier-face { height: 72px; }
+  .tier-top-1, .tier-bottom-1 { width: 210px; height: 210px; }
+
+  .tier-2 .tier-cylinder { width: 165px; height: 65px; }
+  .tier-2 .tier-face { height: 65px; }
+  .tier-top-2, .tier-bottom-2 { width: 165px; height: 165px; }
+
+  .tier-3 .tier-cylinder { width: 125px; height: 60px; }
+  .tier-3 .tier-face { height: 60px; }
+  .tier-top-3, .tier-bottom-3 { width: 125px; height: 125px; }
+
+  .tier-4 .tier-cylinder { width: 88px; height: 55px; }
+  .tier-4 .tier-face { height: 55px; }
+  .tier-top-4, .tier-bottom-4 { width: 88px; height: 88px; }
+
+  .tier-5 .tier-cylinder { width: 55px; height: 48px; }
+  .tier-5 .tier-face { height: 48px; }
+  .tier-top-5, .tier-bottom-5 { width: 55px; height: 55px; }
+}
+
+@media (max-width: 480px) {
+  .cake-section {
+    min-height: 480px;
+    padding: 20px 0 40px;
+  }
+
+  .cake-stage {
+    width: 300px;
+    height: 460px;
+    perspective: 800px;
+  }
+
+  .cake-glow { width: 280px; height: 280px; }
+  .cake-glow-2 { width: 340px; height: 340px; }
+
+  .tier-1 .tier-cylinder { width: 175px; height: 62px; }
+  .tier-1 .tier-face { height: 62px; }
+  .tier-top-1, .tier-bottom-1 { width: 175px; height: 175px; }
+
+  .tier-2 .tier-cylinder { width: 138px; height: 56px; }
+  .tier-2 .tier-face { height: 56px; }
+  .tier-top-2, .tier-bottom-2 { width: 138px; height: 138px; }
+
+  .tier-3 .tier-cylinder { width: 105px; height: 52px; }
+  .tier-3 .tier-face { height: 52px; }
+  .tier-top-3, .tier-bottom-3 { width: 105px; height: 105px; }
+
+  .tier-4 .tier-cylinder { width: 74px; height: 48px; }
+  .tier-4 .tier-face { height: 48px; }
+  .tier-top-4, .tier-bottom-4 { width: 74px; height: 74px; }
+
+  .tier-5 .tier-cylinder { width: 46px; height: 42px; }
+  .tier-5 .tier-face { height: 42px; }
+  .tier-top-5, .tier-bottom-5 { width: 46px; height: 46px; }
+
+  .candle-stick { width: 7px; margin-left: -3.5px; }
+  .center-stick { width: 14px; height: 35px; margin-left: -7px; }
+  .center-number { font-size: 9px; }
+  .cake-topper { font-size: 24px; top: -85px; }
+  .decor-emoji { font-size: 12px; }
+}

@@ -1,0 +1,89 @@
+.floating-items-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.floating-item {
+  position: absolute;
+  bottom: -50px;
+  animation: floatUpSway linear infinite;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+}
+
+@keyframes floatUpSway {
+  0% {
+    transform: translateY(0) rotate(0deg) translateX(0);
+    opacity: 0;
+  }
+  5% {
+    opacity: 1;
+  }
+  25% {
+    transform: translateY(-25vh) rotate(90deg) translateX(20px);
+  }
+  50% {
+    transform: translateY(-50vh) rotate(180deg) translateX(-15px);
+  }
+  75% {
+    transform: translateY(-75vh) rotate(270deg) translateX(25px);
+  }
+  95% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(-110vh) rotate(360deg) translateX(-10px);
+    opacity: 0;
+  }
+}
+
+/* Side decorations */
+.side-deco {
+  position: fixed;
+  top: 0;
+  height: 100%;
+  width: 50px;
+  z-index: 4;
+}
+
+.side-deco-left {
+  left: 5px;
+}
+
+.side-deco-right {
+  right: 5px;
+}
+
+.side-flower {
+  position: absolute;
+  font-size: 24px;
+  animation: sideFlowerSway 3s ease-in-out infinite alternate;
+}
+
+.side-deco-left .side-flower {
+  left: 0;
+}
+
+.side-deco-right .side-flower {
+  right: 0;
+}
+
+@keyframes sideFlowerSway {
+  0% { transform: rotate(-15deg) scale(1); }
+  50% { transform: rotate(0deg) scale(1.1); }
+  100% { transform: rotate(15deg) scale(1); }
+}
+
+@media (max-width: 768px) {
+  .side-deco {
+    width: 30px;
+  }
+  .side-flower {
+    font-size: 18px;
+  }
+}
